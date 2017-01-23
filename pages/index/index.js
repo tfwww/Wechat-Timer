@@ -3,13 +3,13 @@
 var app = getApp()
 Page({
   data: {
-    motto: 'Hello World',
+    motto: 'Tomato Timer',
     userInfo: {}
   },
   //事件处理函数
   bindViewTap: function() {
     wx.navigateTo({
-      url: '../logs/logs'
+      url: '../timer/timer'
     })
   },
   onLoad: function () {
