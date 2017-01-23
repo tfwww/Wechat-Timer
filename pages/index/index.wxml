@@ -16,3 +16,9 @@
   </view>
 </view>
 
+<button>开始计时</button>
+
+<view class="buttom-container">
+  <button>开始计时</button>
+  <button>开始计时</button>
+</view>

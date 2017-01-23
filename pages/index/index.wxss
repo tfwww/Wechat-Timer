@@ -18,3 +18,8 @@
   border-color: gray;
   border-width: 1px;
 }
+
+.buttom-container button {
+  display: inline-block;
+}
+
