@@ -1,24 +1,20 @@
-<view class="title">
-  <text>选择一个任务\n</text>
-  <text>在接下来的 25 分钟，专注做这件事</text>
-</view>
-
-<view class="section">
-  <view class="item-container">
-    <view class="item">工作</view>
-    <view class="item">学习</view>
-    <view class="item">思考</view>
+<view style="{{display}}">
+  <view class="title">
+    <text>选择一个任务\n</text>
+    <text>在接下来的 25 分钟，专注做这件事</text>
   </view>
-  <view class="item-container">
-    <view class="item">写作</view>
-    <view class="item">运动</view>
-    <view class="item">阅读</view>
+
+  <view class="section">
+    <view class="item-container">
+      <view class="item">工作</view>
+      <view class="item">学习</view>
+      <view class="item">思考</view>
+    </view>
+    <view class="item-container">
+      <view class="item">写作</view>
+      <view class="item">运动</view>
+      <view class="item">阅读</view>
+    </view>
   </view>
-</view>
-
-<button bindtap="bindViewTap">开始计时</button>
-
-<view class="buttom-container">
-  <button>计时</button>
-  <button>统计</button>
+  <button id="id-btn-start" bindtap="bindViewTap">开始计时</button>
 </view>

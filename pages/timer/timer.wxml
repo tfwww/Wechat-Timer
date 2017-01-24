@@ -1,10 +1,6 @@
-<view class="container">
+<view class="container hide-page">
     <view class="action-btn">
         <button>暂停计时</button>
         <button>放弃</button>
-    </view>
-    <view class="buttom-container">
-        <button>计时</button>
-        <button>统计</button>
     </view>
 </view>
