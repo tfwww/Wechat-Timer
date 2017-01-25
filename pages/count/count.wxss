@@ -8,7 +8,7 @@ page {
 
 .count-container {
   margin-bottom: 10px;
-  padding-bottom:20px;
+  padding-bottom: 20px;
 }
 
 .today-container {
@@ -20,6 +20,17 @@ page {
   flex-direction: row;
   align-items: center;
   justify-content: center;
+}
+
+.row1 {
+  font-family: "宋体";
+  font-size: 80%;
+  color: #868686;
+}
+
+.row2 {
+  font-size: 150%;
+  color: red;
 }
 
 .item {
