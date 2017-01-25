@@ -25,7 +25,7 @@
     <text>{{time}}</text>
   </view>
   <view class="action-btn">
-    <button>暂停计时</button>
+    <button bindtap="stopCount">暂停计时</button>
     <button>放弃</button>
   </view>
 </view>

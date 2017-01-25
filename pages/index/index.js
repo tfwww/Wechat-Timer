@@ -3,6 +3,7 @@
 var app = getApp()
 var period = 25 * 60 * 1000
 var interval = 1000
+var timeCounter
 
 var countStart = function(that) {
   // 渲染倒计时时钟
@@ -16,10 +17,14 @@ var countStart = function(that) {
     // timeout则跳出递归
     clearTimeout(timeCounter)
   }
-  setTimeout(function() {
+    timeCounter = setTimeout(function() {
     period -= interval
     countStart(that)
   }, interval)
+}
+
+var countStop = function() {
+  clearTimeout(timeCounter)
 }
 
 // 时间格式化输出，如 25:19。每 1000ms 都会调用一次
@@ -46,11 +51,18 @@ Page({
     countStart(this)
   },
 
+  stopCount: function() {
+    countStop()
+    var stopTime = this.data['time']
+    this.setData({
+      time: stopTime
+    })
+  },
+
   onLoad: function () {
     console.log('onLoad')
   }
 })
 
-// 倒计时
 
 
