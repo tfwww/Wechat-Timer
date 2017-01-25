@@ -14,9 +14,22 @@
             <view class="">今日完成</view>
             <view class="">2017 年 01 月 25 日</view>
         </view>
-        <view class="show-inline">一个番茄</view>
+        <view class="show-inline tomato-number">1 个番茄</view>
     </view>
     <view>
     扇形图
+    </view>
+</view>
+
+<view class="recently-container">
+    <view class="">
+        <view class="show-inline">
+            <view class="">最近一周完成</view>
+            <view class="">平均每天 0.3 个番茄</view>
+        </view>
+        <view class="show-inline tomato-number">1 个番茄</view>
+    </view>
+    <view>
+    条形图
     </view>
 </view>

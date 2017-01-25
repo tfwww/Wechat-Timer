@@ -15,5 +15,11 @@
 }
 
 .show-inline {
-    display: inline-block;
+  display: inline-block;
+}
+
+.tomato-number {
+  float:right;
+  position:relative;
+  top:10px;
 }
