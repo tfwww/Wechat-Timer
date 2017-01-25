@@ -1,10 +1,10 @@
 <view class="item-container">
-    <view class="item">今日番茄数</view>
+    <view class="item right-border">今日番茄数</view>
     <view class="item">累计数</view>
 </view>
 
 <view class="item-container">
-    <view class="item">1</view>
+    <view class="item right-border">1</view>
     <view class="item">1</view>
 </view>
 
