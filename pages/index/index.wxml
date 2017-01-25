@@ -1,4 +1,4 @@
-<view style="{{display}}">
+<view style="display: {{display}}">
   <view class="title">
     <text>选择一个任务\n</text>
     <text>在接下来的 25 分钟，专注做这件事</text>
@@ -18,3 +18,15 @@
   </view>
   <button id="id-btn-start" bindtap="bindViewTap">开始计时</button>
 </view>
+
+<!--开始计时后的页面-->
+<view class="container" style="display: {{timerDisplay}}">
+  <view class="time-container">
+    <text>{{time}}</text>
+  </view>
+  <view class="action-btn">
+    <button>暂停计时</button>
+    <button>放弃</button>
+  </view>
+</view>
+

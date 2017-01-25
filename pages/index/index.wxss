@@ -23,3 +23,10 @@
   display: inline-block;
 }
 
+page {
+  background-image: url("../../images/bg.jpg");
+}
+
+.time-container {
+  text-align: center;
+}
