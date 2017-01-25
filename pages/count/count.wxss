@@ -1,3 +1,20 @@
+page {
+  background-color: #F2F2F2;
+}
+
+.bgcolor {
+  background-color: white;
+}
+
+.count-container {
+  margin-bottom: 10px;
+  padding-bottom:20px;
+}
+
+.today-container {
+  margin-bottom: 10px;
+}
+
 .item-container {
   display: flex;
   flex-direction: row;
@@ -13,7 +30,7 @@
 
 .right-border {
   border-right-style: solid;
-  border-right-color: gray;
+  border-right-color: #F2F2F2;
   border-right-width: 1px;
 }
 
