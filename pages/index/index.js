@@ -4,6 +4,7 @@ var app = getApp()
 var period = 25 * 60 * 1000
 var interval = 1000
 var timeCounter
+var flag = 0
 
 var countStart = function(that) {
   // 渲染倒计时时钟
@@ -17,14 +18,20 @@ var countStart = function(that) {
     // timeout则跳出递归
     clearTimeout(timeCounter)
   }
-    timeCounter = setTimeout(function() {
+  timeCounter = setTimeout(function() {
     period -= interval
     countStart(that)
   }, interval)
+  flag = 1
 }
 
 var countStop = function() {
   clearTimeout(timeCounter)
+}
+
+var restartTimer = function(that) {
+    period = 25 * 60 * 1000
+    countStart(that)
 }
 
 // 时间格式化输出，如 25:19。每 1000ms 都会调用一次
@@ -41,16 +48,17 @@ Page({
     timerDisplay: 'none'
   },
 
-  //事件处理函数
+  // 事件处理函数
   bindViewTap: function(event) {
     console.log('event')
     this.setData({
       display: 'none',
       timerDisplay: 'block'
     })
-    countStart(this)
+    // countStart(this)
+    restartTimer(this)
   },
-
+  // 暂停计时
   stopCount: function() {
     countStop()
     var stopTime = this.data['time']
@@ -58,7 +66,15 @@ Page({
       time: stopTime
     })
   },
-
+  // 放弃
+  giveUp: function() {
+    console.log('give up')
+    countStop()
+    this.setData({
+      display: 'block',
+      timerDisplay: 'none',
+    })
+  },
   onLoad: function () {
     console.log('onLoad')
   }
