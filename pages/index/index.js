@@ -1,7 +1,7 @@
 //index.js
 //获取应用实例
 var app = getApp()
-var period = 25 * 60 * 1000
+var period = 1 * 60 * 1000
 var interval = 1000
 var timeCounter
 var flag = 0
@@ -13,7 +13,8 @@ var countStart = function(that) {
   })
   if (period <= 0) {
     that.setData({
-      time: "已经截止"
+      time: "已完成",
+      timeEndDisplay: "none"
     })
     // timeout则跳出递归
     clearTimeout(timeCounter)
@@ -30,7 +31,7 @@ var countStop = function() {
 }
 
 var restartTimer = function(that) {
-    period = 25 * 60 * 1000
+    period = 1 * 60 * 1000
     countStart(that)
 }
 
@@ -48,7 +49,7 @@ Page({
     timerDisplay: 'none'
   },
 
-  // 事件处理函数
+  // 事件处理函数 开始计时
   bindViewTap: function(event) {
     console.log('event')
     this.setData({

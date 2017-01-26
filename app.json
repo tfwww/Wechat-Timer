@@ -1,8 +1,7 @@
 {
   "pages": [
-    "pages/count/count",
     "pages/index/index",
-    "pages/timer/timer"
+    "pages/count/count"
   ],
 
   "window": {

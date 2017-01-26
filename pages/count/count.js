@@ -27,6 +27,7 @@ var ringCharts = new wxCharts({
 })
 
 var squareCharts = new wxCharts({
+    animation: true,
     canvasId: 'areaCanvas',
     type: 'area',
     categories: ['2016-08', '2016-09', '2016-10', '2016-11', '2016-12', '2017'],

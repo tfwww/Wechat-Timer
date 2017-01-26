@@ -24,7 +24,7 @@
   <view class="time-container">
     <text>{{time}}</text>
   </view>
-  <view class="action-btn">
+  <view class="action-btn" style="display: {{timeEndDisplay}}">
     <button bindtap="stopCount">暂停计时</button>
     <button bindtap="giveUp">放弃</button>
   </view>
