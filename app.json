@@ -1,7 +1,7 @@
 {
   "pages": [
-    "pages/index/index",
-    "pages/count/count"
+    "pages/count/count",
+    "pages/index/index"
   ],
 
   "window": {

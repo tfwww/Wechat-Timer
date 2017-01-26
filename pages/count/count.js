@@ -50,7 +50,7 @@ var squareCharts = new wxCharts({
         }
     },
     width: 640,
-    height: 400
+    height: 400,
 })
 
 Page({
@@ -62,6 +62,6 @@ Page({
   onLoad: function(){
     console.log('count on load')
     ringCharts
-    // squareCharts
+    squareCharts
   }
 })
