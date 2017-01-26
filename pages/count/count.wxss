@@ -56,6 +56,7 @@ page {
 }
 
 .ring-canvas {
+  width: 750px;
   height: 300px;
   transform: scale(0.5);
   margin-left: -188px;

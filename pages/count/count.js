@@ -1,7 +1,8 @@
 var util = require('../../utils/util.js')
 var wxCharts = require('../../utils/wxcharts.js')
-var res = wx.getSystemInfoSync();
-var windowWidth = res.windowWidth;
+var res = wx.getSystemInfoSync()
+var windowWidth = res.windowWidth
+console.log('windowWidth', windowWidth)
 
 var ringCharts = new wxCharts({
   animation: true,
@@ -25,14 +26,41 @@ var ringCharts = new wxCharts({
   dataLabel: false,
 })
 
+var squareCharts = new wxCharts({
+    canvasId: 'areaCanvas',
+    type: 'area',
+    categories: ['2016-08', '2016-09', '2016-10', '2016-11', '2016-12', '2017'],
+    series: [{
+        name: '成交量1',
+        data: [70, 40, 65, 100, 34, 18],
+        format: function (val) {
+            return val.toFixed(2) + '万';
+        }
+    }, {
+        name: '成交量2',
+        data: [15, 20, 45, 37, 4, 80],
+        format: function (val) {
+            return val.toFixed(2) + '万';
+        }
+    }],
+    yAxis: {
+        format: function (val) {
+            return val + '万';
+        }
+    },
+    width: 640,
+    height: 400
+})
+
 Page({
-  data:{
+  data: {
     date: util.formatTime(new Date()),
     deviceWidth: windowWidth * 2
   },
 
-  onLoad:function(options){
+  onLoad: function(){
     console.log('count on load')
     ringCharts
+    // squareCharts
   }
 })
