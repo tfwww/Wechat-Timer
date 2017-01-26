@@ -5,6 +5,7 @@ var period = 1 * 60 * 1000
 var interval = 1000
 var timeCounter
 var flag = 0
+var count = 0
 
 var countStart = function(that) {
   // 渲染倒计时时钟
@@ -13,12 +14,23 @@ var countStart = function(that) {
   })
   if (period <= 0) {
     that.setData({
-      time: "已完成",
-      timeEndDisplay: "none"
+      time: '已完成',
+      timeEndDisplay: 'none',
+      newDisplay: 'block'
     })
     // timeout则跳出递归
     clearTimeout(timeCounter)
-  }
+    // 存储番茄钟数据
+    var tomatoData = wx.setStorage({
+      key: 'numberOfTomato', data: count++});
+      return
+    }
+    wx.getStorage({
+      key: 'numberOfTomato',
+      success: function(res) {
+        console.log('data', res.data)
+      } 
+    })
   timeCounter = setTimeout(function() {
     period -= interval
     countStart(that)
@@ -43,10 +55,15 @@ var timeFormat = function(wholeTime) {
   return `${periodMin}:${periodSec}`
 }
 
+var setTomatoData = function(value) {
+
+}
+
 Page({
   data: {
     display: 'block',
-    timerDisplay: 'none'
+    timerDisplay: 'none',
+    newDisplay: 'none'
   },
 
   // 事件处理函数 开始计时
@@ -75,6 +92,14 @@ Page({
       display: 'block',
       timerDisplay: 'none',
     })
+  },
+  // 开始新番茄
+  newTimer: function() {
+    this.setData({
+      timeEndDisplay: 'block',
+      newDisplay: 'none'
+    })
+    restartTimer(this)
   },
   onLoad: function () {
     console.log('onLoad')

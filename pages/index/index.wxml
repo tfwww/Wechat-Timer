@@ -29,4 +29,7 @@
     <button bindtap="giveUp">放弃</button>
   </view>
 </view>
+<view style="display: {{newDisplay}}">
+    <button bindtap="newTimer">开始新番茄</button>
+  </view>
 
