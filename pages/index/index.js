@@ -20,17 +20,19 @@ var countStart = function(that) {
     })
     // timeout则跳出递归
     clearTimeout(timeCounter)
+    count = count + 1
+    console.log('count', count)
     // 存储番茄钟数据
-    var tomatoData = wx.setStorage({
-      key: 'numberOfTomato', data: count++});
+    wx.setStorage({
+      key: 'numberOfTomato', data: count});
       return
     }
-    wx.getStorage({
-      key: 'numberOfTomato',
-      success: function(res) {
-        console.log('data', res.data)
-      } 
-    })
+    // wx.getStorage({
+    //   key: 'numberOfTomato',
+    //   success: function(res) {
+    //     console.log('data', res.data)
+    //   } 
+    // })
   timeCounter = setTimeout(function() {
     period -= interval
     countStart(that)
@@ -53,10 +55,6 @@ var timeFormat = function(wholeTime) {
   var periodSec = (wholeTime / 1000) % 60
   var periodMin = Math.floor(period / 1000 / 60)
   return `${periodMin}:${periodSec}`
-}
-
-var setTomatoData = function(value) {
-
 }
 
 Page({
