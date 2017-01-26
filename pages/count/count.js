@@ -3,10 +3,10 @@ var wxCharts = require('../../utils/wxcharts.js')
 var res = wx.getSystemInfoSync();
 var windowWidth = res.windowWidth;
 
-var pieCharts = new wxCharts({
+var ringCharts = new wxCharts({
   animation: true,
-  canvasId: 'pieCanvas',
-  type: 'pie',
+  canvasId: 'ringCanvas',
+  type: 'ring',
   series: [{
       name: '成交量1',
       data: 15,
@@ -18,31 +18,12 @@ var pieCharts = new wxCharts({
       data: 78,
     }, {
       name: '成交量4',
-      data: 63,
-    }, {
-      name: '成交量2',
-      data: 35,
-    }, {
-      name: '成交量3',
-      data: 78,
-    }, {
-      name: '成交量4',
-      data: 63,
-    }, {
-      name: '成交量2',
-      data: 35,
-    }, {
-      name: '成交量3',
-      data: 78,
-    }, {
-      name: '成交量3',
       data: 78,
   }],
-  width: windowWidth,
+  width: 750,
   height: 300,
   dataLabel: false,
 })
-
 
 Page({
   data:{
@@ -51,6 +32,6 @@ Page({
 
   onLoad:function(options){
     console.log('count on load')
-    pieCharts
+    ringCharts
   }
 })

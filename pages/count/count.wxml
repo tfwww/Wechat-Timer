@@ -18,7 +18,7 @@
         <view class="show-inline tomato-number">1 个番茄</view>
     </view>
     <view>
-        <canvas canvas-id="pieCanvas" class="canvas" style="height:300px"></canvas>
+        <canvas canvas-id="ringCanvas" class="ring-canvas"></canvas>
     </view>
 </view>
 
@@ -34,4 +34,5 @@
     条形图
     </view>
 </view>
+
 
