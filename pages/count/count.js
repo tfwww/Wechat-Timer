@@ -20,14 +20,15 @@ var ringCharts = new wxCharts({
       name: '成交量4',
       data: 78,
   }],
-  width: 750,
+  width: windowWidth * 2,
   height: 300,
   dataLabel: false,
 })
 
 Page({
   data:{
-    date: util.formatTime(new Date())
+    date: util.formatTime(new Date()),
+    deviceWidth: windowWidth * 2
   },
 
   onLoad:function(options){

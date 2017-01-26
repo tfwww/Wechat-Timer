@@ -18,7 +18,7 @@
         <view class="show-inline tomato-number">1 个番茄</view>
     </view>
     <view>
-        <canvas canvas-id="ringCanvas" class="ring-canvas"></canvas>
+        <canvas canvas-id="ringCanvas" class="ring-canvas" style="width: {{deviceWidth}}px"></canvas>
     </view>
 </view>
 
