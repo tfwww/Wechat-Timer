@@ -61,7 +61,29 @@ Page({
   data: {
     display: 'block',
     timerDisplay: 'none',
-    newDisplay: 'none'
+    newDisplay: 'none',
+    radioItems: [
+      {name: 'USA', value: '美国'},
+      {name: 'CHN', value: '中国', checked: 'true'},
+      {name: 'BRA', value: '巴西'},
+      {name: 'JPN', value: '日本'},
+      {name: 'ENG', value: '英国'},
+      {name: 'TUR', value: '法国'},
+    ],
+    hidden: false
+  },
+
+  radioChange: function(event) {
+    var checked = event.detail.value
+    var changed = {}
+    for (var i = 0; i < this.data.radioItems.length; i ++) {
+      if (checked.indexOf(this.data.radioItems[i].name) !== -1) {
+        changed['radioItems['+i+'].checked'] = true
+      } else {
+        changed['radioItems['+i+'].checked'] = false
+      }
+    }
+    this.setData(changed)
   },
 
   // 事件处理函数 开始计时

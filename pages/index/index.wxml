@@ -3,17 +3,25 @@
     <text>选择一个任务\n</text>
     <text>在接下来的 25 分钟，专注做这件事</text>
   </view>
-
   <view class="section">
-    <view class="item-container">
-      <view class="item">工作</view>
-      <view class="item">学习</view>
-      <view class="item">思考</view>
+    <radio-group class="group" bindchange="radioChange">
+      <!--<view class="item-container">
+        <view class="item">工作</view>
+        <view class="item">学习</view>
+        <view class="item">思考</view>
+      </view>-->
+      <view class="label-1" wx:for="{{radioItems}}">
+      <radio id="{{item.name}}" hidden value="{{item.name}}" checked="{{item.checked}}"></radio>
+      <view class="label-icon">
+        <view class="label-icon-checked" style="opacity:{{item.checked ? 1: 0}}"></view>
+      </view>
+      <label class="label-text" for="{{item.name}}"><text>{{item.name}}</text></label>
     </view>
+    </radio-group>
     <view class="item-container">
-      <view class="item">写作</view>
+      <!--<view class="item">写作</view>
       <view class="item">运动</view>
-      <view class="item">阅读</view>
+      <view class="item">阅读</view>-->
     </view>
   </view>
   <button id="id-btn-start" bindtap="bindViewTap">开始计时</button>
@@ -29,7 +37,9 @@
     <button bindtap="giveUp">放弃</button>
   </view>
 </view>
+
 <view style="display: {{newDisplay}}">
     <button bindtap="newTimer">开始新番茄</button>
-  </view>
+</view>
+
 
