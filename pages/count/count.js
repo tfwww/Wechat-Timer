@@ -19,19 +19,6 @@ var ringCharts = new wxCharts({
   animation: true,
   canvasId: 'ringCanvas',
   type: 'ring',
-  // series: [{
-  //     name: '成交量1',
-  //     data: 15,
-  //   }, {
-  //     name: '成交量2',
-  //     data: 35,
-  //   }, {
-  //     name: '成交量3',
-  //     data: 78,
-  //   }, {
-  //     name: '成交量4',
-  //     data: 78,
-  // }],
   series: tomatoData,
   width: windowWidth * 2,
   height: 300,
@@ -39,30 +26,18 @@ var ringCharts = new wxCharts({
 })
 
 var squareCharts = new wxCharts({
-    animation: true,
     canvasId: 'areaCanvas',
-    type: 'area',
-    categories: ['2016-08', '2016-09', '2016-10', '2016-11', '2016-12', '2017'],
+    type: 'column',
+    categories: ['2012', '2013', '2014', '2015', '2016', '2017'],
     series: [{
         name: '成交量1',
-        data: [70, 40, 65, 100, 34, 18],
-        // format: function (val) {
-        //     return val.toFixed(2) + '万';
-        // }
-    }, {
-        name: '成交量2',
-        data: [15, 20, 45, 37, 4, 80],
-        // format: function (val) {
-        //     return val.toFixed(2) + '万';
-        // }
+        data: [15, 20, 45, 37, 4, 80]
     }],
     yAxis: {
-        // format: function (val) {
-        //     return val + '万';
-        // }
+        disabled: true
     },
-    width: 640,
-    height: 400,
+    width: windowWidth * 2,
+    height: 300
 })
 
 Page({
