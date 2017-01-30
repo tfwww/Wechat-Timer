@@ -5,7 +5,16 @@ var period = 1 * 60 * 1000
 var interval = 1000
 var timeCounter
 var flag = 0
-var count = 0
+// var count = 0
+var checkedInx = 0
+var tomatoObj = [
+  {'kindOf': '工作', 'numberOf': 0},
+  {'kindOf': '学习', 'numberOf': 0},
+  {'kindOf': '思考', 'numberOf': 0},
+  {'kindOf': '写作', 'numberOf': 0},
+  {'kindOf': '运动', 'numberOf': 0},
+  {'kindOf': '阅读', 'numberOf': 0},
+  ]
 
 var countStart = function(that) {
   // 渲染倒计时时钟
@@ -20,11 +29,11 @@ var countStart = function(that) {
     })
     // timeout则跳出递归
     clearTimeout(timeCounter)
-    count = count + 1
-    console.log('count', count)
+    tomatoObj[checkedInx].numberOf = tomatoObj[checkedInx].numberOf + 1
+    console.log('count', tomatoObj[checkedInx].numberOf)
     // 存储番茄钟数据
-    wx.setStorage({
-      key: 'numberOfTomato', data: count});
+      wx.setStorage({
+        key: 'tomato', data: tomatoObj})
       return
     }
     // wx.getStorage({
@@ -63,12 +72,12 @@ Page({
     timerDisplay: 'none',
     newDisplay: 'none',
     radioItems: [
-      {name: 'USA', value: '美国'},
-      {name: 'CHN', value: '中国', checked: 'true'},
-      {name: 'BRA', value: '巴西'},
-      {name: 'JPN', value: '日本'},
-      {name: 'ENG', value: '英国'},
-      {name: 'TUR', value: '法国'},
+      {name: '工作', value: '0'},
+      {name: '学习', value: '1', checked: 'true'},
+      {name: '思考', value: '2'},
+      {name: '写作', value: '3'},
+      {name: '运动', value: '4'},
+      {name: '阅读', value: '5'},
     ],
     hidden: false
   },
@@ -76,13 +85,22 @@ Page({
   radioChange: function(event) {
     var checked = event.detail.value
     var changed = {}
-    for (var i = 0; i < this.data.radioItems.length; i ++) {
+    for (var i = 0; i < this.data.radioItems.length; i++) {
       if (checked.indexOf(this.data.radioItems[i].name) !== -1) {
         changed['radioItems['+i+'].checked'] = true
+        checkedInx = i
+        console.log('check inx', checkedInx)
+        // console.log('this.data', this.data.radioItems[i].checked)
+        // console.log('change', checked)
+        // tomatoObj.kindOf = this.data.radioItems[i].name
+        // console.log('findal', tomatoObj.kindOf)
       } else {
         changed['radioItems['+i+'].checked'] = false
       }
     }
+    // wx.setStorage({
+    //   key: 'kindOfTomato', data: count});
+    // console.log('event', event)
     this.setData(changed)
   },
 
