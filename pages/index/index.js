@@ -8,12 +8,12 @@ var flag = 0
 // var count = 0
 var checkedInx = 0
 var tomatoObj = [
-  {'kindOf': '工作', 'numberOf': 0},
-  {'kindOf': '学习', 'numberOf': 0},
-  {'kindOf': '思考', 'numberOf': 0},
-  {'kindOf': '写作', 'numberOf': 0},
-  {'kindOf': '运动', 'numberOf': 0},
-  {'kindOf': '阅读', 'numberOf': 0},
+  {'name': '工作', 'data': 0},
+  {'name': '学习', 'data': 0},
+  {'name': '思考', 'data': 0},
+  {'name': '写作', 'data': 0},
+  {'name': '运动', 'data': 0},
+  {'name': '阅读', 'data': 0}
   ]
 
 var countStart = function(that) {
@@ -29,8 +29,8 @@ var countStart = function(that) {
     })
     // timeout则跳出递归
     clearTimeout(timeCounter)
-    tomatoObj[checkedInx].numberOf = tomatoObj[checkedInx].numberOf + 1
-    console.log('count', tomatoObj[checkedInx].numberOf)
+    tomatoObj[checkedInx].data = tomatoObj[checkedInx].data + 1
+    console.log('count', tomatoObj[checkedInx].data)
     // 存储番茄钟数据
       wx.setStorage({
         key: 'tomato', data: tomatoObj})

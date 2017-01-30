@@ -3,24 +3,36 @@ var wxCharts = require('../../utils/wxcharts.js')
 var res = wx.getSystemInfoSync()
 var windowWidth = res.windowWidth
 console.log('windowWidth', windowWidth)
+var tomatoData = wx.getStorageSync('tomato')
+console.log('tomatoData', tomatoData)
+
+var tomatoObj = [
+  {'name': '工作', 'data': 0},
+  {'name': '学习', 'data': 0},
+  {'name': '思考', 'data': 0},
+  {'name': '写作', 'data': 0},
+  {'name': '运动', 'data': 0},
+  {'name': '阅读', 'data': 1}
+  ]
 
 var ringCharts = new wxCharts({
   animation: true,
   canvasId: 'ringCanvas',
   type: 'ring',
-  series: [{
-      name: '成交量1',
-      data: 15,
-    }, {
-      name: '成交量2',
-      data: 35,
-    }, {
-      name: '成交量3',
-      data: 78,
-    }, {
-      name: '成交量4',
-      data: 78,
-  }],
+  // series: [{
+  //     name: '成交量1',
+  //     data: 15,
+  //   }, {
+  //     name: '成交量2',
+  //     data: 35,
+  //   }, {
+  //     name: '成交量3',
+  //     data: 78,
+  //   }, {
+  //     name: '成交量4',
+  //     data: 78,
+  // }],
+  series: tomatoData,
   width: windowWidth * 2,
   height: 300,
   dataLabel: false,
@@ -34,20 +46,20 @@ var squareCharts = new wxCharts({
     series: [{
         name: '成交量1',
         data: [70, 40, 65, 100, 34, 18],
-        format: function (val) {
-            return val.toFixed(2) + '万';
-        }
+        // format: function (val) {
+        //     return val.toFixed(2) + '万';
+        // }
     }, {
         name: '成交量2',
         data: [15, 20, 45, 37, 4, 80],
-        format: function (val) {
-            return val.toFixed(2) + '万';
-        }
+        // format: function (val) {
+        //     return val.toFixed(2) + '万';
+        // }
     }],
     yAxis: {
-        format: function (val) {
-            return val + '万';
-        }
+        // format: function (val) {
+        //     return val + '万';
+        // }
     },
     width: 640,
     height: 400,
