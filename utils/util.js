@@ -31,9 +31,27 @@ function getBeforeNday(date,n) {
     return dataStr 
   } 
 
+// 生成最近一周时间横坐标
+var makeDate = function() {
+  var today = new Date()
+  var day = today.getDate()
+  var i = 0
+  var dateArray = []
+  while(i < 7) {
+    dateArray.push(day--)
+    i++
+  }
+  var revDate = dateArray.reverse()
+  console.log('revDate0', revDate)
+  revDate[0] = getBeforeNday(today, today.getDay() + 4)
+  console.log('revDate1', revDate)
+  return revDate
+}
+
 module.exports = {
   formatTime: formatTime,
-  getBeforeNday: getBeforeNday
+  getBeforeNday: getBeforeNday,
+  makeDate: makeDate
 }
 
 

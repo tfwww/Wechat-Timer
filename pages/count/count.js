@@ -5,6 +5,7 @@ var windowWidth = res.windowWidth
 console.log('windowWidth', windowWidth)
 var tomatoData = wx.getStorageSync('tomato')
 console.log('tomatoData', tomatoData)
+var tomatoInDays = wx.getStorageSync('tomatoDays')
 
 var tomatoObj = [
   {'name': '工作', 'data': 0},
@@ -15,10 +16,10 @@ var tomatoObj = [
   {'name': '阅读', 'data': 1}
   ]
 
+// 生成最近一周时间横坐标
 var makeDate = function() {
   var today = new Date()
   var day = today.getDate()
-  var month = today.getMonth() + 1
   var i = 0
   var dateArray = []
   while(i < 7) {
@@ -41,24 +42,26 @@ var ringCharts = function(data) {
   width: windowWidth * 2,
   height: 300,
   dataLabel: false,
-})
+  })
 }
 
-
-var squareCharts = new wxCharts({
+var squareCharts = function(data) {
+    new wxCharts({
     canvasId: 'areaCanvas',
     type: 'column',
-    categories: ['2012', '2013', '2014', '2015', '2016', '2017'],
+    legend: false,
+    categories: util.makeDate(),
     series: [{
         name: '成交量1',
-        data: [15, 20, 45, 37, 4, 80]
+        data: data
     }],
     yAxis: {
         disabled: true
     },
     width: windowWidth * 2,
     height: 300
-})
+  })
+}
 
 Page({
   data: {
@@ -78,7 +81,8 @@ Page({
     tomatoData = wx.getStorageSync('tomato')
     console.log('tomatoData', tomatoData)
     ringCharts(tomatoData)
-    squareCharts
-    makeDate()
+
+    tomatoInDays = wx.getStorageSync('tomatoDays')
+    squareCharts(tomatoInDays)
   }
 })

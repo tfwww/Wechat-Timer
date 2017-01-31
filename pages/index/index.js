@@ -8,13 +8,49 @@ var flag = 0
 // var count = 0
 var checkedInx = 0
 var tomatoObj = [
-  {'name': '工作', 'data': 0},
-  {'name': '学习', 'data': 0},
-  {'name': '思考', 'data': 0},
-  {'name': '写作', 'data': 0},
-  {'name': '运动', 'data': 0},
-  {'name': '阅读', 'data': 0}
+    {'name': '工作', 'data': 0},
+    {'name': '学习', 'data': 0},
+    {'name': '思考', 'data': 0},
+    {'name': '写作', 'data': 0},
+    {'name': '运动', 'data': 0},
+    {'name': '阅读', 'data': 0}
   ]
+// var tomatoDay = [
+//     {'day': 0, 'numberOf': 0}
+//   ]
+var tomatoDay = [{'day': 0, 'numberOf': 0}]
+var tomatoArray = [0]
+
+var storeInDay = function(currentDay) {
+  var tmp = {'day': currentDay, 'numberOf': 1}
+  // tomatoDay.push(tmp)
+  var endInx = tomatoDay.length - 1
+  if (tomatoDay[endInx].day === currentDay) {
+    tomatoDay[endInx].numberOf++
+    console.log('in', tomatoArray[endInx])
+    tomatoArray[endInx]++
+    console.log('in', tomatoArray)
+  } else {
+    tomatoDay.push(tmp)
+    tomatoArray.push(tmp.numberOf)
+  }
+  console.log('tomatoDay', tomatoDay)
+  console.log('tomatoArray', tomatoArray)
+  
+  // 不到一周时，对数据补零
+  var tmpArray = tomatoArray.slice(1)
+  var restArray = []
+  var len = 7 - tmpArray.length
+  if (tmpArray.length < 7) {
+    for (var i = 0; i < len; i++) {
+      restArray.push(0)
+    }
+  }
+  var result = restArray.concat(tmpArray)
+  console.log('result', result)
+  // return tomatoDay
+  return result
+}
 
 var countStart = function(that) {
   // 渲染倒计时时钟
@@ -34,6 +70,11 @@ var countStart = function(that) {
     // 存储番茄钟数据
       wx.setStorage({
         key: 'tomato', data: tomatoObj})
+      var now = new Date()
+      var day = now.getDate()
+      // storeInDay(day)
+      wx.setStorage({
+        key: 'tomatoDays', data: storeInDay(day)})
       return
     }
     // wx.getStorage({
