@@ -4,8 +4,8 @@
         <view class="item">累计数</view>
     </view>
     <view class="item-container row2">
-        <view class="item right-border">1</view>
-        <view class="item">1</view>
+        <view class="item right-border">{{todayTomato}}</view>
+        <view class="item">{{allTomato}}</view>
     </view>
 </view>
 

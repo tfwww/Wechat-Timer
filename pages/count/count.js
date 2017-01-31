@@ -63,10 +63,21 @@ var squareCharts = function(data) {
   })
 }
 
+// 计算累计番茄数
+var calAllTomato = function() {
+  var result = 0
+  for (var i = 0; i < tomatoInDays.length; i++) {
+    result += tomatoInDays[i]
+  }
+  return result
+}
+
 Page({
   data: {
     date: util.formatTime(new Date()),
-    deviceWidth: windowWidth * 2
+    deviceWidth: windowWidth * 2,
+    todayTomato: tomatoInDays[tomatoInDays.length -1],
+    allTomato: calAllTomato()
   },
 
   onLoad: function(){
@@ -80,7 +91,7 @@ Page({
     console.log('show')
     tomatoData = wx.getStorageSync('tomato')
     console.log('tomatoData', tomatoData)
-    ringCharts(tomatoData)
+    ringCharts(wx.getStorageSync('tomato'))
 
     tomatoInDays = wx.getStorageSync('tomatoDays')
     squareCharts(tomatoInDays)

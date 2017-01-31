@@ -67,6 +67,7 @@ var countStart = function(that) {
     clearTimeout(timeCounter)
     tomatoObj[checkedInx].data = tomatoObj[checkedInx].data + 1
     console.log('count', tomatoObj[checkedInx].data)
+    console.log('tomato obj data', tomatoObj)
     // 存储番茄钟数据
       wx.setStorage({
         key: 'tomato', data: tomatoObj})
