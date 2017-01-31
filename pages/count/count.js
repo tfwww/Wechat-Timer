@@ -18,13 +18,18 @@ var tomatoObj = [
 var makeDate = function() {
   var today = new Date()
   var day = today.getDate()
+  var month = today.getMonth() + 1
   var i = 0
   var dateArray = []
   while(i < 7) {
-    dateArray.push(day)
+    dateArray.push(day--)
+    i++
   }
-  console.log('dateArray', dateArray)
-  return dateArray
+  var revDate = dateArray.reverse()
+  console.log('revDate0', revDate)
+  revDate[0] = util.getBeforeNday(today, today.getDay() + 4)
+  console.log('revDate1', revDate)
+  return revDate
 }
 
 var ringCharts = function(data) {
@@ -63,7 +68,8 @@ Page({
 
   onLoad: function(){
     console.log('count on load')
-    ringCharts
+    tomatoData = wx.getStorageSync('tomato')
+    ringCharts(tomatoData)
     squareCharts
   },
 
@@ -73,5 +79,6 @@ Page({
     console.log('tomatoData', tomatoData)
     ringCharts(tomatoData)
     squareCharts
+    makeDate()
   }
 })
