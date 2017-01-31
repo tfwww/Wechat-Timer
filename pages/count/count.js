@@ -15,15 +15,30 @@ var tomatoObj = [
   {'name': '阅读', 'data': 1}
   ]
 
-var ringCharts = new wxCharts({
+var makeDate = function() {
+  var today = new Date()
+  var day = today.getDate()
+  var i = 0
+  var dateArray = []
+  while(i < 7) {
+    dateArray.push(day)
+  }
+  console.log('dateArray', dateArray)
+  return dateArray
+}
+
+var ringCharts = function(data) {
+  new wxCharts({
   animation: true,
   canvasId: 'ringCanvas',
   type: 'ring',
-  series: tomatoData,
+  series: data,
   width: windowWidth * 2,
   height: 300,
   dataLabel: false,
 })
+}
+
 
 var squareCharts = new wxCharts({
     canvasId: 'areaCanvas',
@@ -49,6 +64,14 @@ Page({
   onLoad: function(){
     console.log('count on load')
     ringCharts
+    squareCharts
+  },
+
+  onShow: function() {
+    console.log('show')
+    tomatoData = wx.getStorageSync('tomato')
+    console.log('tomatoData', tomatoData)
+    ringCharts(tomatoData)
     squareCharts
   }
 })
