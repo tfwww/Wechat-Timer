@@ -16,23 +16,6 @@ var tomatoObj = [
   {'name': '阅读', 'data': 1}
   ]
 
-// 生成最近一周时间横坐标
-var makeDate = function() {
-  var today = new Date()
-  var day = today.getDate()
-  var i = 0
-  var dateArray = []
-  while(i < 7) {
-    dateArray.push(day--)
-    i++
-  }
-  var revDate = dateArray.reverse()
-  console.log('revDate0', revDate)
-  revDate[0] = util.getBeforeNday(today, today.getDay() + 4)
-  console.log('revDate1', revDate)
-  return revDate
-}
-
 var ringCharts = function(data) {
   new wxCharts({
   animation: true,
@@ -84,7 +67,7 @@ Page({
     console.log('count on load')
     tomatoData = wx.getStorageSync('tomato')
     ringCharts(tomatoData)
-    squareCharts
+    squareCharts(tomatoInDays)
   },
 
   onShow: function() {
@@ -95,5 +78,9 @@ Page({
 
     tomatoInDays = wx.getStorageSync('tomatoDays')
     squareCharts(tomatoInDays)
+    this.setData({
+      todayTomato: tomatoInDays[tomatoInDays.length -1],
+      allTomato: calAllTomato()
+    })
   }
 })

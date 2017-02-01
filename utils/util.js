@@ -16,36 +16,48 @@ function formatNumber(n) {
   return n[1] ? n : '0' + n
 }
 
-function getBeforeNday(date,n) {      
-    var yesterday_milliseconds = date.getTime() - n * 1000 * 60 * 60 * 24 
-    var yesterday = new Date()      
-    yesterday.setTime(yesterday_milliseconds)          
-    var strYear = yesterday.getFullYear()   
+function getBeforeNday(date, n, flag) {
+    var yesterday_milliseconds = date.getTime() - n * 1000 * 60 * 60 * 24
+    var yesterday = new Date()
+    yesterday.setTime(yesterday_milliseconds)
+    var strYear = yesterday.getFullYear()
     var strDay = yesterday.getDate()
-    var strMonth = yesterday.getMonth() + 1 
-    if(strMonth < 10) {    
-        strMonth = "0" + strMonth    
-    }    
-    // datastr = strYear+"/"+strMonth+"/"+strDay 
-    var dataStr = `${strMonth} 月 ${strDay} 日`
-    return dataStr 
-  } 
+    var strMonth = yesterday.getMonth() + 1
+
+    // var dataStr = strYear+"/"+strMonth+"/"+strDay
+    // var dataStr = `${strMonth} 月 ${strDay} 日`
+
+    // 格式化输出格式
+    if (flag === 0) {
+        var dataStr = `${strYear}, ${strMonth}, ${strDay}`
+    }
+    if (flag === 1) {
+        var dataStr = `${strMonth} 月 ${strDay} 日`
+    }
+    return dataStr
+  }
 
 // 生成最近一周时间横坐标
 var makeDate = function() {
-  var today = new Date()
-  var day = today.getDate()
-  var i = 0
+  var date1 = new Date()
+  // console.log('date1', date1)
+  var date2 = getBeforeNday(date1, date1.getDay() + 3, 0)
+  var preivous = new Date(date2)
+  // console.log('preivous', preivous)
+  var daymis = 24 * 3600 * 1000
+  var now = date1
+  // console.log('now', now)
   var dateArray = []
-  while(i < 7) {
-    dateArray.push(day--)
-    i++
+  while(preivous < now) {
+      console.log(preivous.getDate())
+      dateArray.push(preivous.getDate())
+      preivous = new Date(preivous.getTime()+daymis)
   }
-  var revDate = dateArray.reverse()
-  console.log('revDate0', revDate)
-  revDate[0] = getBeforeNday(today, today.getDay() + 4)
-  console.log('revDate1', revDate)
-  return revDate
+  // console.log('result:', dateArray)
+   // 第一个元素变成月日格式
+  dateArray[0] = getBeforeNday(date1, date1.getDay() + 3, 1)
+  // console.log('date 0', dateArray[0])
+  return dateArray
 }
 
 module.exports = {
