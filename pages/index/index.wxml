@@ -27,7 +27,7 @@
       <view class="item">阅读</view>-->
     </view>
   </view>
-  <button id="id-btn-start" bindtap="bindViewTap">开始计时</button>
+  <button id="id-btn-start" bindtap="bindViewTap"><text>开始计时</text></button>
 </view>
 
 <!--开始计时后的页面-->
@@ -37,8 +37,8 @@
       <text>{{time}}</text>
     </view>
     <view class="action-btn" style="display: {{timeEndDisplay}}">
-      <button bindtap="stopCount">暂停计时</button>
-      <button bindtap="giveUp">放弃</button>
+      <button class="pause-btn" bindtap="stopCount"><text>暂停计时</text></button>
+      <button class="end-btn" bindtap="giveUp"><text>放弃</text></button>
     </view>
   </view>
 

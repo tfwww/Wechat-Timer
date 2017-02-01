@@ -6,7 +6,7 @@
 
   "window": {
     "backgroundTextStyle":"light",
-    "navigationBarBackgroundColor": "#F96A6E",
+    "navigationBarBackgroundColor": "rgba(250, 85, 88, 0.8)",
     "navigationBarTitleText": "番茄闹钟",
     "navigationBarTextStyle":"black"
   },

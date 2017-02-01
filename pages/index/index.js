@@ -1,7 +1,7 @@
 //index.js
 //获取应用实例
 var app = getApp()
-var period = 1 * 60 * 1000
+var period = 25 * 60 * 1000
 var interval = 1000
 var timeCounter
 var flag = 0
@@ -122,7 +122,7 @@ var countStop = function() {
 }
 
 var restartTimer = function(that) {
-    period = 1 * 60 * 1000
+    period = 60 * 60 * 1000
     countStart(that)
 }
 

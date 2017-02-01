@@ -72,6 +72,7 @@
     display: inline-block;
     vertical-align: middle;
     color: gray;
+    font-size: 80%;
 }
 
 .black-font {
@@ -105,15 +106,59 @@
 }
 
 .label-icon-checked {
-    position:absolute;
-    left:-31px;
-    top:49px;
-    width:100px;
-    height:2px;
-    background:#1aad19;
+  position:absolute;
+  left:-30px;
+  top:59px;
+  width:100px;
+  height:2px;
+  background:#F75058;
 }
 
 .label-4_text{
     text-align: center;
     margin-top: 15px;
+}
+
+#id-btn-start {
+  margin-top: 50px;
+  background-color: white;
+  width: 130px;
+}
+
+#id-btn-start::after {
+  border:2px solid #F96A6E;
+  border-radius:45px;
+}
+
+#id-btn-start text {
+  font-size: 80%;
+  color: #F96A6E;
+}
+
+.pause-btn {
+  background-color: rgba(250, 85, 88, 0.1);
+  width: 150px;
+}
+
+.pause-btn::after {
+  border:2px solid white;
+  border-radius:40px;
+}
+
+.pause-btn text {
+  color: white;
+}
+
+.end-btn {
+  background-color: rgba(250, 85, 88, 0.1);
+  width: 150px;
+}
+
+.end-btn::after {
+  border:0px;
+  border-radius:40px;
+}
+
+.end-btn text {
+  color: white;
 }
