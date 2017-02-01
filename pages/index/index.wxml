@@ -10,13 +10,12 @@
         <view class="item">学习</view>
         <view class="item">思考</view>
       </view>-->
-      <view class="label-1" wx:for="{{radioItems}}">
+      <view class="label-1 {{item.style}}" wx:for="{{radioItems}}">
       <radio id="{{item.name}}" hidden value="{{item.name}}" checked="{{item.checked}}"></radio>
       <view class="label-icon">
         <view class="label-icon-checked" style="opacity:{{item.checked ? 1: 0}}"></view>
       </view>
-      
-      <label class="label-text" for="{{item.name}}">
+      <label class="label-text {{item.font}}" for="{{item.name}}">
         <image class="image-size" src="{{item.value}}"></image>
         <text>{{item.name}}</text>
       </label>

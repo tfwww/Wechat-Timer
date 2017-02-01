@@ -38,7 +38,6 @@ var fitImg = function(that) {
         })
       }
     })
-  
 }
 
 var storeInDay = function(currentDay) {
@@ -141,12 +140,12 @@ Page({
     timerDisplay: 'none',
     newDisplay: 'none',
     radioItems: [
-      {name: '工作', value: '../../images/work1.png'},
-      {name: '学习', value: '../../images/study1.png', checked: 'true'},
-      {name: '思考', value: '../../images/think1.png'},
-      {name: '写作', value: '../../images/write1.png'},
+      {name: '工作', value: '../../images/work1.png', style: 'label-work-study'},
+      {name: '学习', value: '../../images/study1.png', style: 'label-work-study', checked: 'true', font: 'black-font'},
+      {name: '思考', value: '../../images/think1.png', style: 'label-think'},
+      {name: '写作', value: '../../images/write1.png', style: 'label-write'},
       {name: '运动', value: '../../images/sports1.png'},
-      {name: '阅读', value: '../../images/read1.png'},
+      {name: '阅读', value: '../../images/read1.png', style: 'label-read'},
     ],
     hidden: false
   },
@@ -154,23 +153,28 @@ Page({
   radioChange: function(event) {
     var checked = event.detail.value
     var changed = {}
+    var blackFont = {}
     for (var i = 0; i < this.data.radioItems.length; i++) {
       if (checked.indexOf(this.data.radioItems[i].name) !== -1) {
         changed['radioItems['+i+'].checked'] = true
-        checkedInx = i
-        console.log('check inx', checkedInx)
+        blackFont['radioItems['+i+'].font'] = 'black-font'
+        // checkedInx = i
+        // console.log('check inx', checkedInx)
         // console.log('this.data', this.data.radioItems[i].checked)
         // console.log('change', checked)
         // tomatoObj.kindOf = this.data.radioItems[i].name
         // console.log('findal', tomatoObj.kindOf)
       } else {
         changed['radioItems['+i+'].checked'] = false
+        blackFont['radioItems['+i+'].font'] = ''
       }
     }
     // wx.setStorage({
     //   key: 'kindOfTomato', data: count});
     // console.log('event', event)
+    console.log('touched font', blackFont)
     this.setData(changed)
+    this.setData(blackFont)
   },
 
   // 事件处理函数 开始计时
