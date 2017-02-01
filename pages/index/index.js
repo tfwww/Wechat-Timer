@@ -5,6 +5,8 @@ var period = 1 * 60 * 1000
 var interval = 1000
 var timeCounter
 var flag = 0
+var res = wx.getSystemInfoSync()
+
 // var count = 0
 var checkedInx = 0
 var tomatoObj = [
@@ -20,6 +22,24 @@ var tomatoObj = [
 //   ]
 var tomatoDay = [{'day': 0, 'numberOf': 0}]
 var tomatoArray = [0]
+
+var fitImg = function(that) {
+  var sysWidth = res.windowWidth
+  var sysHeight = res.windowHeight
+  wx.getImageInfo({
+      src: '../../images/bg.png',
+      success: function (res) {
+        console.log('img width', res.width)
+        var scale = sysHeight / res.height
+        console.log('img height', scale)
+        that.setData({
+          imgWidth: sysWidth,
+          imgHeight: sysHeight
+        })
+      }
+    })
+  
+}
 
 var storeInDay = function(currentDay) {
   var tmp = {'day': currentDay, 'numberOf': 1}
@@ -158,8 +178,9 @@ Page({
     console.log('event')
     this.setData({
       display: 'none',
-      timerDisplay: 'block'
+      timerDisplay: 'block',
     })
+    fitImg(this)
     // countStart(this)
     restartTimer(this)
   },
