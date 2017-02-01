@@ -5,8 +5,12 @@
   text-align: center;
 }
 
-.bg-image {
-  z-index: -1;
+.image-size {
+  height: 32px;
+  width: 32px;
+  display: block;
+  margin-bottom: 20px;
+  margin-left: 5px;
 }
 
 .item-container {
@@ -36,13 +40,17 @@
 }
 
 .section {
-  padding-left:70px;
-  padding-right:100px;
+  text-align:center;
 }
 
 .label-1, .label-2{
-    margin-bottom: 15px;
-    display:inline-block;
+  display:inline-block;
+  border-style:solid;
+  padding-right:30px;
+  border-width:1px;
+  padding-bottom:30px;
+  padding-top:30px;
+  padding-left:30px;
 }
 .label-text {
     display: inline-block;
@@ -72,22 +80,16 @@
 .label-icon {
     position: relative;
     display: inline-block;
-    vertical-align: middle;
-    margin-right: 10px;
-    width: 18px;
-    height: 18px;
     background: #fcfff4;
-    border-radius: 50px;
 }
 
 .label-icon-checked {
-    position: absolute;
-    left: 3px;
-    top: 3px;
-    width: 12px;
-    height: 12px;
-    background: #1aad19;
-    border-radius: 50%;
+    position:absolute;
+    left:-31px;
+    top:49px;
+    width:100px;
+    height:2px;
+    background:#1aad19;
 }
 
 .label-4_text{

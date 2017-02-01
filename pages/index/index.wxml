@@ -1,7 +1,7 @@
 <view style="display: {{display}}">
   <view class="title">
     <text style="margin-top: 50px;margin-bottom: 15px;">选择一个任务\n</text>
-    <text>在接下来的 25 分钟，专注做这件事</text>
+    <text style="margin-bottom: 15px;font-size: 80%;color: gray;">在接下来的 25 分钟，专注做这件事</text>
   </view>
   <view class="section">
     <radio-group class="group" bindchange="radioChange">
@@ -15,7 +15,11 @@
       <view class="label-icon">
         <view class="label-icon-checked" style="opacity:{{item.checked ? 1: 0}}"></view>
       </view>
-      <label class="label-text" for="{{item.name}}"><text>{{item.name}}</text></label>
+      
+      <label class="label-text" for="{{item.name}}">
+        <image class="image-size" src="{{item.value}}"></image>
+        <text>{{item.name}}</text>
+      </label>
     </view>
     </radio-group>
     <view class="item-container">

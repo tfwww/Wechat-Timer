@@ -141,12 +141,12 @@ Page({
     timerDisplay: 'none',
     newDisplay: 'none',
     radioItems: [
-      {name: '工作', value: '0'},
-      {name: '学习', value: '1', checked: 'true'},
-      {name: '思考', value: '2'},
-      {name: '写作', value: '3'},
-      {name: '运动', value: '4'},
-      {name: '阅读', value: '5'},
+      {name: '工作', value: '../../images/work1.png'},
+      {name: '学习', value: '../../images/study1.png', checked: 'true'},
+      {name: '思考', value: '../../images/think1.png'},
+      {name: '写作', value: '../../images/write1.png'},
+      {name: '运动', value: '../../images/sports1.png'},
+      {name: '阅读', value: '../../images/read1.png'},
     ],
     hidden: false
   },
