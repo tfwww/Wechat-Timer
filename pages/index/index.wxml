@@ -1,6 +1,6 @@
 <view style="display: {{display}}">
   <view class="title">
-    <text>选择一个任务\n</text>
+    <text style="margin-top: 50px;margin-bottom: 15px;">选择一个任务\n</text>
     <text>在接下来的 25 分钟，专注做这件事</text>
   </view>
   <view class="section">
