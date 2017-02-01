@@ -71,16 +71,18 @@ Page({
   },
 
   onShow: function() {
-    console.log('show')
     tomatoData = wx.getStorageSync('tomato')
-    console.log('tomatoData', tomatoData)
+    // console.log('tomatoData', tomatoData)
     ringCharts(wx.getStorageSync('tomato'))
 
     tomatoInDays = wx.getStorageSync('tomatoDays')
+    console.log('tomatoDays', tomatoInDays)
     squareCharts(tomatoInDays)
+    var num = calAllTomato() / 7
     this.setData({
       todayTomato: tomatoInDays[tomatoInDays.length -1],
-      allTomato: calAllTomato()
+      allTomato: calAllTomato(), 
+      perdayTomato: num.toFixed(1)
     })
   }
 })

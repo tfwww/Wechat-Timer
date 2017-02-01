@@ -49,6 +49,13 @@ var storeInDay = function(currentDay) {
   var result = restArray.concat(tmpArray)
   console.log('result', result)
   // return tomatoDay
+
+  // 大于一周，即多于 7 个元素时，取后面后面 7 个元素
+  if (result.length > 7) {
+    var start = result.length - 7
+    result = result.slice(start)
+    console.log('start', start)
+  }
   return result
 }
 
