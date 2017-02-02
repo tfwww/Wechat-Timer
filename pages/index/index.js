@@ -1,14 +1,16 @@
 //index.js
 //获取应用实例
 var app = getApp()
-var period = 25 * 60 * 1000
+var period = 1 * 60 * 1000
 var interval = 1000
 var timeCounter
 var flag = 0
 var res = wx.getSystemInfoSync()
+var sysWidth = res.windowWidth
+var sysHeight = res.windowHeight 
 
 // var count = 0
-var checkedInx = 0
+var checkedInx
 var tomatoObj = [
     {'name': '工作', 'data': 0},
     {'name': '学习', 'data': 0},
@@ -122,7 +124,7 @@ var countStop = function() {
 }
 
 var restartTimer = function(that) {
-    period = 60 * 60 * 1000
+    period = 1 * 60 * 1000
     countStart(that)
 }
 
@@ -136,6 +138,9 @@ var timeFormat = function(wholeTime) {
 
 Page({
   data: {
+    x: 0,
+    y: 0,
+    hiddenView: false,
     display: 'block',
     timerDisplay: 'none',
     newDisplay: 'none',
@@ -150,6 +155,26 @@ Page({
     hidden: false
   },
 
+  start: function(e) {
+    console.log('start e', e)
+    this.setData({
+      hiddenView: false,
+      x: e.touches[0].x,
+      y: e.touches[0].y
+    })
+  },
+  move: function(e) {
+    this.setData({
+      x: e.touches[0].x,
+      y: e.touches[0].y
+    })
+  },
+  end: function(e) {
+    this.setData({
+      hiddenView: true
+    })
+  },
+
   radioChange: function(event) {
     var checked = event.detail.value
     var changed = {}
@@ -158,8 +183,8 @@ Page({
       if (checked.indexOf(this.data.radioItems[i].name) !== -1) {
         changed['radioItems['+i+'].checked'] = true
         blackFont['radioItems['+i+'].font'] = 'black-font'
-        // checkedInx = i
-        // console.log('check inx', checkedInx)
+        checkedInx = i
+        console.log('check inx', checkedInx)
         // console.log('this.data', this.data.radioItems[i].checked)
         // console.log('change', checked)
         // tomatoObj.kindOf = this.data.radioItems[i].name
@@ -185,6 +210,30 @@ Page({
       timerDisplay: 'block',
     })
     fitImg(this)
+    // 画圆
+    // 使用 wx.createContext 获取绘图上下文 context
+    var context = wx.createContext() //创建绘图工具
+    // context.stroke()//对当前的路径进行描边
+    // context.setStrokeStyle("#ff0000")//同上
+    // context.setLineWidth(2)
+    // context.moveTo(sysWidth / 2, 80)// 把路径移动到画布中的指定点，但不创建线条。参数自然就是坐标
+    context.arc(sysWidth / 2, 100, 90, 0, 2 * Math.PI, true)//添加一个弧形路径到当前路径，顺时针绘制。
+    //参数方面其中前两个参数还是坐标，第三个参数是矩形的宽度，第四各参数是起始弧度，从起始弧度开始，扫过的弧度，后一个参数可有可无
+    context.stroke()
+    context.setStrokeStyle("white")
+    context.setLineWidth(2)
+    context.arc(sysWidth / 2, 100, 110, 0, 2 * Math.PI, true)
+    context.stroke()
+    context.setStrokeStyle("#ff0000")
+    context.setLineWidth(0.5)
+    context.arc(sysWidth / 2, 100, 140, 0, 2 * Math.PI, true)
+    context.stroke()
+    // 调用 wx.drawCanvas，通过 canvasId 指定在哪张画布上绘制，通过 actions 指定绘制行为
+    wx.drawCanvas({
+      canvasId: 'circle',//这个就是刚开始设置的plainId
+      actions: context.getActions() // 获取绘图动作数组
+    })
+
     // countStart(this)
     restartTimer(this)
   },

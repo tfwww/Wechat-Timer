@@ -120,18 +120,18 @@
 }
 
 #id-btn-start {
-  margin-top: 50px;
+  margin-top: 60px;
   background-color: white;
   width: 130px;
 }
 
 #id-btn-start::after {
   border:2px solid #F96A6E;
-  border-radius:45px;
+  border-radius: 45px;
 }
 
 #id-btn-start text {
-  font-size: 80%;
+  font-size: 90%;
   color: #F96A6E;
 }
 
