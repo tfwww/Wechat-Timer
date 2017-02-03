@@ -1,16 +1,15 @@
 //index.js
 //获取应用实例
 var app = getApp()
-var period = 60 * 60 * 1000
+var period = 1 * 60 * 1000
 var interval = 1000
 var timeCounter
 var flag = 0
 var res = wx.getSystemInfoSync()
 var sysWidth = res.windowWidth
 var sysHeight = res.windowHeight 
-
-// var count = 0
 var checkedInx
+var tmpAngle = -0.5 * Math.PI + 6 * Math.PI / 180
 var tomatoObj = [
     {'name': '工作', 'data': 0},
     {'name': '学习', 'data': 0},
@@ -25,6 +24,19 @@ var tomatoObj = [
 var tomatoDay = [{'day': 0, 'numberOf': 0}]
 var tomatoArray = [0]
 
+// 进度条动画动画
+var progressAnimate = function(that) {
+  var timeID = setTimeout(function() {
+    that.setData({
+      progressPercent: interval--
+    })
+  }, 1000)
+  if(interval <= 0) {
+    clearTimeout(timeID)
+  }
+}
+
+// 调整图片
 var fitImg = function(that) {
   var sysWidth = res.windowWidth
   var sysHeight = res.windowHeight
@@ -115,6 +127,7 @@ var countStart = function(that) {
   timeCounter = setTimeout(function() {
     period -= interval
     countStart(that)
+    testCircle()
   }, interval)
   flag = 1
 }
@@ -124,7 +137,7 @@ var countStop = function() {
 }
 
 var restartTimer = function(that) {
-    period = 60 * 60 * 1000
+    period = 1 * 60 * 1000
     countStart(that)
 }
 
@@ -176,40 +189,28 @@ var drawCircles = function() {
 
 var testCircle = function() {
   var cxt_arc = wx.createCanvasContext('circleCanvas');//创建并返回绘图上下文context对象。  
-    cxt_arc.setLineWidth(6);  
-    cxt_arc.setStrokeStyle('#d2d2d2');  
-    cxt_arc.setLineCap('round')  
-    cxt_arc.beginPath();//开始一个新的路径  
-    cxt_arc.arc(106, 106, 100, 0, 2*Math.PI, false);//设置一个原点(106,106)，半径为100的圆的路径到当前路径  
-    cxt_arc.stroke();//对当前路径进行描边  
-      
-    cxt_arc.setLineWidth(6);  
-    cxt_arc.setStrokeStyle('#3ea6ff');  
-    cxt_arc.setLineCap('round')  
-    cxt_arc.beginPath();//开始一个新的路径  
-    cxt_arc.arc(106, 106, 100, -0.5 * Math.PI, 0, false); 
-    cxt_arc.stroke();//对当前路径进行描边  
-  
-    cxt_arc.draw();  
-}
-
-var testDot = function(that) {
-  var i = 0
-        var dotAnData =wx.createAnimation({
-            duration: 1000,
-            transformOrigin: '4px 91px'
-        })
-        dotAnFun =setInterval(function() {
-             dotAnData.rotate(6 * (++i)).step()
-             that.setData({
-                  dotAnData: dotAnData.export()
-             })
-        }.bind(that), 1000)
+  cxt_arc.setLineWidth(6);  
+  cxt_arc.setStrokeStyle('#d2d2d2');  
+  cxt_arc.setLineCap('round')  
+  cxt_arc.beginPath();//开始一个新的路径  
+  cxt_arc.arc(sysWidth / 2, 180, 100, 0, 2*Math.PI, false);//设置一个原点(106,106)，半径为100的圆的路径到当前路径  
+  cxt_arc.stroke();//对当前路径进行描边     
+  cxt_arc.setLineWidth(6);  
+  cxt_arc.setStrokeStyle('#3ea6ff');  
+  cxt_arc.setLineCap('round')  
+    
+  // var tmpAngle = 0.24 * Math.PI / 180
+  var step = 6 * Math.PI / 180
+  tmpAngle = tmpAngle + step
+  console.log('tmpAngle', tmpAngle)
+  cxt_arc.beginPath();//开始一个新的路径
+  cxt_arc.arc(sysWidth / 2, 180, 100, -0.5 * Math.PI, tmpAngle, false); 
+  cxt_arc.stroke();//对当前路径进行描边
+  cxt_arc.draw(); 
 }
 
 Page({
   data: {
-    dotAnData: {},
     display: 'block',
     timerDisplay: 'none',
     newDisplay: 'none',
@@ -291,18 +292,6 @@ Page({
   },
   onLoad: function () {
     console.log('onLoad')
-    // testDot(this)
-    var i = 0
-        var dotAnData =wx.createAnimation({
-            duration: 1000,
-            transformOrigin: '4px 91px'
-        })
-        var dotAnFun =setInterval(function() {
-             dotAnData.rotate(6 * (++i)).step()
-             this.setData({
-                  dotAnData: dotAnData.export()
-             })
-        }.bind(this), 1000)
   }
 })
 

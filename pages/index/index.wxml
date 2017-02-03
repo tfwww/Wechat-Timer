@@ -28,12 +28,6 @@
     </view>
   </view>
   <button id="id-btn-start" bindtap="bindViewTap"><text>开始计时</text></button>
-  <!--test-->
-    <view class='animation-box'>
-      <view class = 'time-crl-path'></view>
-      <view class = 'crl-dot' animation='{{dotAnData}}'></view>
-    </view>
-  <!--test-->
 </view>
 
 
