@@ -41,7 +41,7 @@ function getBeforeNday(date, n, flag) {
 var makeDate = function() {
   var date1 = new Date()
   // console.log('date1', date1)
-  var date2 = getBeforeNday(date1, date1.getDay() + 2, 0)
+  var date2 = getBeforeNday(date1, 6, 0)
   var preivous = new Date(date2)
   // console.log('preivous', preivous)
   var daymis = 24 * 3600 * 1000
@@ -51,11 +51,11 @@ var makeDate = function() {
   while(preivous < now) {
       console.log(preivous.getDate())
       dateArray.push(preivous.getDate())
-      preivous = new Date(preivous.getTime()+daymis)
+      preivous = new Date(preivous.getTime() + daymis)
   }
   // console.log('result:', dateArray)
    // 第一个元素变成月日格式
-  dateArray[0] = getBeforeNday(date1, date1.getDay() + 2, 1)
+  dateArray[0] = getBeforeNday(date1, 6, 1)
   // console.log('date 0', dateArray[0])
   return dateArray
 }

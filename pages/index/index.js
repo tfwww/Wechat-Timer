@@ -1,7 +1,7 @@
 //index.js
 //获取应用实例
 var app = getApp()
-var period = 1 * 60 * 1000
+var period = 60 * 60 * 1000
 var interval = 1000
 var timeCounter
 var flag = 0
@@ -124,7 +124,7 @@ var countStop = function() {
 }
 
 var restartTimer = function(that) {
-    period = 1 * 60 * 1000
+    period = 60 * 60 * 1000
     countStart(that)
 }
 
@@ -136,11 +136,80 @@ var timeFormat = function(wholeTime) {
   return `${periodMin}:${periodSec}`
 }
 
+// 画圆
+var drawCircles = function() {
+  console.log('draw')
+  var ctx = wx.createCanvasContext('circleCanvas')
+  // 第一个内圆
+  ctx.setStrokeStyle("white")
+  ctx.setLineWidth(2)
+  ctx.arc(sysWidth / 2, 150, 90, 0, 2 * Math.PI, true)
+  ctx.stroke()
+  // 第二个圆
+  ctx.beginPath()
+  ctx.setStrokeStyle("black")
+  ctx.setLineWidth(2)
+  ctx.arc(sysWidth / 2, 80, 110, 0, 2 * Math.PI, true)
+  ctx.closePath()
+  ctx.stroke()
+  // 第三个圆
+  ctx.beginPath()
+  ctx.setStrokeStyle("black")
+  ctx.setLineWidth(2)
+  ctx.arc(sysWidth / 2, 80, 140, 0, 2 * Math.PI, true)
+  ctx.closePath()
+  ctx.stroke()
+  // 动态画圆
+  ctx.beginPath()
+  ctx.moveTo(sysWidth / 2, 0)
+  ctx.lineTo(sysWidth / 2, 0)
+  // ctx.rotate((Math.PI/30)* 50)
+  ctx.setStrokeStyle("black")
+  ctx.closePath()
+  ctx.stroke()
+
+  wx.drawCanvas({
+      canvasId: 'circleCanvas',
+      actions: ctx.getActions()
+    })
+}
+
+var testCircle = function() {
+  var cxt_arc = wx.createCanvasContext('circleCanvas');//创建并返回绘图上下文context对象。  
+    cxt_arc.setLineWidth(6);  
+    cxt_arc.setStrokeStyle('#d2d2d2');  
+    cxt_arc.setLineCap('round')  
+    cxt_arc.beginPath();//开始一个新的路径  
+    cxt_arc.arc(106, 106, 100, 0, 2*Math.PI, false);//设置一个原点(106,106)，半径为100的圆的路径到当前路径  
+    cxt_arc.stroke();//对当前路径进行描边  
+      
+    cxt_arc.setLineWidth(6);  
+    cxt_arc.setStrokeStyle('#3ea6ff');  
+    cxt_arc.setLineCap('round')  
+    cxt_arc.beginPath();//开始一个新的路径  
+    cxt_arc.arc(106, 106, 100, -0.5 * Math.PI, 0, false); 
+    cxt_arc.stroke();//对当前路径进行描边  
+  
+    cxt_arc.draw();  
+}
+
+var testDot = function(that) {
+  var i = 0
+        var dotAnData =wx.createAnimation({
+            duration: 1000,
+            transformOrigin: '4px 91px'
+        })
+        dotAnFun =setInterval(function() {
+             dotAnData.rotate(6 * (++i)).step()
+             that.setData({
+                  dotAnData: dotAnData.export()
+             })
+        }.bind(that), 1000)
+}
+
 Page({
   data: {
-    x: 0,
-    y: 0,
-    hiddenView: false,
+    dotAnData: {},
     display: 'block',
     timerDisplay: 'none',
     newDisplay: 'none',
@@ -153,26 +222,6 @@ Page({
       {name: '阅读', value: '../../images/read1.png', style: 'label-read'},
     ],
     hidden: false
-  },
-
-  start: function(e) {
-    console.log('start e', e)
-    this.setData({
-      hiddenView: false,
-      x: e.touches[0].x,
-      y: e.touches[0].y
-    })
-  },
-  move: function(e) {
-    this.setData({
-      x: e.touches[0].x,
-      y: e.touches[0].y
-    })
-  },
-  end: function(e) {
-    this.setData({
-      hiddenView: true
-    })
   },
 
   radioChange: function(event) {
@@ -210,32 +259,10 @@ Page({
       timerDisplay: 'block',
     })
     fitImg(this)
-    // 画圆
-    // 使用 wx.createContext 获取绘图上下文 context
-    var context = wx.createContext() //创建绘图工具
-    // context.stroke()//对当前的路径进行描边
-    // context.setStrokeStyle("#ff0000")//同上
-    // context.setLineWidth(2)
-    // context.moveTo(sysWidth / 2, 80)// 把路径移动到画布中的指定点，但不创建线条。参数自然就是坐标
-    context.arc(sysWidth / 2, 100, 90, 0, 2 * Math.PI, true)//添加一个弧形路径到当前路径，顺时针绘制。
-    //参数方面其中前两个参数还是坐标，第三个参数是矩形的宽度，第四各参数是起始弧度，从起始弧度开始，扫过的弧度，后一个参数可有可无
-    context.stroke()
-    context.setStrokeStyle("white")
-    context.setLineWidth(2)
-    context.arc(sysWidth / 2, 100, 110, 0, 2 * Math.PI, true)
-    context.stroke()
-    context.setStrokeStyle("#ff0000")
-    context.setLineWidth(0.5)
-    context.arc(sysWidth / 2, 100, 140, 0, 2 * Math.PI, true)
-    context.stroke()
-    // 调用 wx.drawCanvas，通过 canvasId 指定在哪张画布上绘制，通过 actions 指定绘制行为
-    wx.drawCanvas({
-      canvasId: 'circle',//这个就是刚开始设置的plainId
-      actions: context.getActions() // 获取绘图动作数组
-    })
-
     // countStart(this)
     restartTimer(this)
+    // drawCircles()
+    // testCircle()
   },
   // 暂停计时
   stopCount: function() {
@@ -264,6 +291,18 @@ Page({
   },
   onLoad: function () {
     console.log('onLoad')
+    // testDot(this)
+    var i = 0
+        var dotAnData =wx.createAnimation({
+            duration: 1000,
+            transformOrigin: '4px 91px'
+        })
+        var dotAnFun =setInterval(function() {
+             dotAnData.rotate(6 * (++i)).step()
+             this.setData({
+                  dotAnData: dotAnData.export()
+             })
+        }.bind(this), 1000)
   }
 })
 

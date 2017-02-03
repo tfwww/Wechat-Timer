@@ -28,14 +28,20 @@
     </view>
   </view>
   <button id="id-btn-start" bindtap="bindViewTap"><text>开始计时</text></button>
+  <!--test-->
+    <view class='animation-box'>
+      <view class = 'time-crl-path'></view>
+      <view class = 'crl-dot' animation='{{dotAnData}}'></view>
+    </view>
+  <!--test-->
 </view>
+
 
 <!--开始计时后的页面-->
 <view style="display: {{timerDisplay}}; background-image: url('../../images/bg.png'); width: {{imgWidth}}px; height: {{imgHeight}}px">
-  <view class="container" style="display: {{timerDisplay}}">
+  <view style="display: {{timerDisplay}}">
+    <canvas canvas-id="circleCanvas" style="height: 300px; width: 360px; border:1px solid #d3d3d3;" />
     <view class="time-container">
-      <view hidden="{{hiddenView}}">Coordinates: ({{x}}, {{y}})</view>
-      <canvas canvas-id="circle" style="margin: 5px; border:1px solid #d3d3d3;" bindtouchstart="start" bindtouchmove="move" bindtouchend="end"/>
       <text>{{time}}</text>
     </view>
     <view class="action-btn" style="display: {{timeEndDisplay}}">

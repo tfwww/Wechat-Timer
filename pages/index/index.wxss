@@ -162,3 +162,16 @@
 .end-btn text {
   color: white;
 }
+
+.animation-box{
+    width: 176px;
+    height:176px;
+}
+.time-crl-path {
+    width: 176px;
+    height: 176px;
+}
+.crl-dot {
+    width: 9px;
+    height:9px;
+}
