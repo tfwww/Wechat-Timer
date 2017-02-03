@@ -71,13 +71,27 @@ Page({
   },
 
   onShow: function() {
-    tomatoData = wx.getStorageSync('tomato')
     // console.log('tomatoData', tomatoData)
-    ringCharts(wx.getStorageSync('tomato'))
-
-    tomatoInDays = wx.getStorageSync('tomatoDays')
+    tomatoData = wx.getStorage({
+      key: 'tomato',
+      success: function(res){
+        console.log('res.data', res.data)
+        ringCharts(res.data)
+      }
+    })
+    tomatoInDays = wx.getStorage({
+      key: 'tomatoDays',
+      success: function(res){
+        squareCharts(res.data)
+      },
+      fail: function() {
+        // fail
+      },
+      complete: function() {
+        // complete
+      }
+    })
     console.log('tomatoDays', tomatoInDays)
-    squareCharts(tomatoInDays)
     var num = calAllTomato() / 7
     this.setData({
       todayTomato: tomatoInDays[tomatoInDays.length -1],
