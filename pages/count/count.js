@@ -32,14 +32,20 @@ var squareCharts = function(data) {
     new wxCharts({
     canvasId: 'areaCanvas',
     type: 'column',
+    dataLabel: false,
+    dataPointShape: false,
     legend: false,
     categories: util.makeDate(),
     series: [{
         name: '成交量1',
-        data: data
+        data: data,
+        color: '#FA5E63'
     }],
     yAxis: {
         disabled: true
+    },
+    xAxis: {
+        disableGrid: true
     },
     width: windowWidth * 2,
     height: 300

@@ -3,11 +3,15 @@ function formatTime(date) {
   var month = date.getMonth() + 1
   var day = date.getDate()
 
+  if (day < 10) {
+    day = '0' + day
+  }
+
   var hour = date.getHours()
   var minute = date.getMinutes()
   var second = date.getSeconds()
 
-  return `${year} 年 ${formatNumber(month)} 月 ${day} 日`
+  return `${year} 年 ${month} 月 ${day} 日`
   // return [year, month, day].map(formatNumber).join('/') + ' ' + [hour, minute, second].map(formatNumber).join(':')
 }
 
