@@ -79,18 +79,19 @@ Page({
         ringCharts(res.data)
       }
     })
-    tomatoInDays = wx.getStorage({
-      key: 'tomatoDays',
-      success: function(res){
-        squareCharts(res.data)
-      },
-      fail: function() {
-        // fail
-      },
-      complete: function() {
-        // complete
-      }
-    })
+    tomatoInDays = wx.getStorageSync('tomatoDays')
+    // tomatoInDays = wx.getStorage({
+    //   key: 'tomatoDays',
+    //   success: function(res){
+    //     squareCharts(res.data)
+    //   },
+    //   fail: function() {
+    //     // fail
+    //   },
+    //   complete: function() {
+    //     // complete
+    //   }
+    // })
     console.log('tomatoDays', tomatoInDays)
     var num = calAllTomato() / 7
     this.setData({

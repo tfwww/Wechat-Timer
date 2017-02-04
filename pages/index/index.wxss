@@ -140,6 +140,7 @@
 .pause-btn {
   background-color: rgba(250, 85, 88, 0.1);
   width: 150px;
+  margin-top: -20px;
 }
 
 .pause-btn::after {
@@ -152,12 +153,17 @@
 }
 
 .continue-btn {
-
+  background-color: white;
+  border-radius: 40px;
+  width: 150px;
+  color: #F75058;
+  margin-top: -20px;
 }
 
 .end-btn {
   background-color: rgba(250, 85, 88, 0.1);
   width: 150px;
+  margin-top: 10px;
 }
 
 .end-btn::after {
@@ -192,3 +198,16 @@
   display: block;
 }
 
+.time-style {
+  color: white;
+  font-size: 250%;
+  position: relative;
+  top: 15px;
+}
+
+.status-style {
+  display: block;
+  color: white;
+  font-size: 80%;
+  margin-top: -35px;
+}

@@ -88,7 +88,8 @@ var countStart = function(that) {
   })
   if (period <= 0) {
     that.setData({
-      time: '已完成',
+      time: '✓',
+      status: '已完成',
       timeEndDisplay: 'none',
       newDisplay: 'block'
     })
@@ -146,66 +147,47 @@ var timeFormat = function(wholeTime) {
   // 换算时间
   var periodSec = (wholeTime / 1000) % 60
   var periodMin = Math.floor(period / 1000 / 60)
+  if(periodSec < 10) {
+    periodSec = '0' + periodSec
+  }
+  if(periodMin < 10) {
+    periodMin = '0' + periodMin
+  }
   return `${periodMin}:${periodSec}`
-}
-
-// 画圆
-var drawCircles = function() {
-  console.log('draw')
-  var ctx = wx.createCanvasContext('circleCanvas')
-  // 第二个圆
-  ctx.beginPath()
-  ctx.setStrokeStyle("black")
-  ctx.setLineWidth(2)
-  ctx.arc(sysWidth / 2, 180, 110, 0, 2 * Math.PI, true)
-  ctx.closePath()
-  ctx.stroke()
-  // 第三个圆
-  ctx.beginPath()
-  ctx.setStrokeStyle("black")
-  ctx.setLineWidth(2)
-  ctx.arc(sysWidth / 2, 180, 140, 0, 2 * Math.PI, true)
-  ctx.closePath()
-  ctx.stroke()
-
-  wx.drawCanvas({
-      canvasId: 'circleCanvas',
-      actions: ctx.getActions()
-    })
 }
 
 var progressCircle = function() {
   var ctx = wx.createCanvasContext('circleCanvas')
-  // 第二个圆
+  // 中间圆
   ctx.beginPath()
-  ctx.setStrokeStyle("black")
-  ctx.setLineWidth(2)
-  ctx.arc(sysWidth / 2, 180, 120, 0, 2 * Math.PI, true)
+  ctx.setStrokeStyle('#D3D3D3')
+  ctx.setLineWidth(0.5)
+  ctx.arc(sysWidth / 2, 180, 110, 0, 2 * Math.PI, true)
   ctx.closePath()
   ctx.stroke()
-  // 第三个圆
+  // 最外圆
   ctx.beginPath()
-  ctx.setStrokeStyle("black")
-  ctx.setLineWidth(2)
-  ctx.arc(sysWidth / 2, 180, 160, 0, 2 * Math.PI, true)
+  ctx.setStrokeStyle('#DCDCDC')
+  ctx.setLineWidth(0.25)
+  ctx.arc(sysWidth / 2, 180, 150, 0, 2 * Math.PI, true)
   ctx.closePath()
   ctx.stroke()
   // 动态画圆
   ctx.setLineWidth(2);  
-  ctx.setStrokeStyle('#d2d2d2');  
+  ctx.setStrokeStyle('#D3D3D3');  
   ctx.setLineCap('round')  
   ctx.beginPath();//开始一个新的路径  
-  ctx.arc(sysWidth / 2, 180, 100, 0, 2*Math.PI, false);//设置一个原点(106,106)，半径为100的圆的路径到当前路径  
+  ctx.arc(sysWidth / 2, 180, 90, 0, 2*Math.PI, false);//设置一个原点(106,106)，半径为100的圆的路径到当前路径  
   ctx.stroke();//对当前路径进行描边     
-  ctx.setLineWidth(2);  
-  ctx.setStrokeStyle('#3ea6ff');  
+  ctx.setLineWidth(2.5);  
+  ctx.setStrokeStyle('#FEFEFE');  
   ctx.setLineCap('round')  
   // var tmpAngle = 0.24 * Math.PI / 180
   var step = 6 * Math.PI / 180
   tmpAngle = tmpAngle + step
   console.log('tmpAngle', tmpAngle)
   ctx.beginPath();//开始一个新的路径
-  ctx.arc(sysWidth / 2, 180, 100, -0.49 * Math.PI, tmpAngle, false); 
+  ctx.arc(sysWidth / 2, 180, 90, -0.49 * Math.PI, tmpAngle, false); 
   ctx.stroke();//对当前路径进行描边
   
   wx.drawCanvas({
@@ -216,6 +198,8 @@ var progressCircle = function() {
 
 Page({
   data: {
+    status: '计时中',
+    continueDisplay: 'hide',
     display: 'block',
     timerDisplay: 'none',
     newDisplay: 'none',
@@ -276,7 +260,8 @@ Page({
     this.setData({
       time: stopTime,
       continueDisplay: 'show',
-      pauseDisplay: 'hide'
+      pauseDisplay: 'hide',
+      status: '已暂停'
     })
     // console.log('stop count')
   },
@@ -286,7 +271,8 @@ Page({
     console.log('continueCount')
     this.setData({
       continueDisplay: 'hide',
-      pauseDisplay: 'show'
+      pauseDisplay: 'show',
+      status: '计时中'
     })
   },
   // 放弃
