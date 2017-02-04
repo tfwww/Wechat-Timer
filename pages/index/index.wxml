@@ -34,12 +34,13 @@
 <!--开始计时后的页面-->
 <view style="display: {{timerDisplay}}; background-image: url('../../images/bg.png'); width: {{imgWidth}}px; height: {{imgHeight}}px">
   <view style="display: {{timerDisplay}}">
-    <canvas canvas-id="circleCanvas" style="height: 300px; width: 360px; border:1px solid #d3d3d3;" />
+    <canvas canvas-id="circleCanvas" style="height: 355px; width: 360px; border:1px solid #d3d3d3;" />
     <view class="time-container">
       <text>{{time}}</text>
     </view>
     <view class="action-btn" style="display: {{timeEndDisplay}}">
-      <button class="pause-btn" bindtap="stopCount"><text>暂停计时</text></button>
+      <button class="pause-btn {{pauseDisplay}}" bindtap="stopCount"><text>暂停计时</text></button>
+      <button class="pause-btn continue-btn {{continueDisplay}}" bindtap="continueCount"><text>继续计时</text></button>
       <button class="end-btn" bindtap="giveUp"><text>放弃</text></button>
     </view>
   </view>

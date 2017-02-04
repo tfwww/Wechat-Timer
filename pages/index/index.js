@@ -9,7 +9,8 @@ var res = wx.getSystemInfoSync()
 var sysWidth = res.windowWidth
 var sysHeight = res.windowHeight 
 var checkedInx
-var tmpAngle = -0.5 * Math.PI + 6 * Math.PI / 180
+var stopPeriod 
+var tmpAngle = -0.5 * Math.PI
 var tomatoObj = [
     {'name': '工作', 'data': 0},
     {'name': '学习', 'data': 0},
@@ -23,18 +24,6 @@ var tomatoObj = [
 //   ]
 var tomatoDay = [{'day': 0, 'numberOf': 0}]
 var tomatoArray = [0]
-
-// 进度条动画动画
-var progressAnimate = function(that) {
-  var timeID = setTimeout(function() {
-    that.setData({
-      progressPercent: interval--
-    })
-  }, 1000)
-  if(interval <= 0) {
-    clearTimeout(timeID)
-  }
-}
 
 // 调整图片
 var fitImg = function(that) {
@@ -127,17 +116,28 @@ var countStart = function(that) {
   timeCounter = setTimeout(function() {
     period -= interval
     countStart(that)
-    testCircle()
+    progressCircle()
   }, interval)
   flag = 1
 }
 
 var countStop = function() {
   clearTimeout(timeCounter)
+  // console.log('period', period)
+  return period
+}
+
+var countContinue = function(tmpPeriod, that) {
+  period = tmpPeriod
+  countStart(that)
 }
 
 var restartTimer = function(that) {
     period = 1 * 60 * 1000
+    tmpAngle = -0.5 * Math.PI
+    // var ctx = wx.createCanvasContext('circleCanvas')
+    // ctx.clearRect(sysWidth / 2 - 100, 180 - 100, 100, 100)
+    // ctx.draw()
     countStart(that)
 }
 
@@ -153,31 +153,18 @@ var timeFormat = function(wholeTime) {
 var drawCircles = function() {
   console.log('draw')
   var ctx = wx.createCanvasContext('circleCanvas')
-  // 第一个内圆
-  ctx.setStrokeStyle("white")
-  ctx.setLineWidth(2)
-  ctx.arc(sysWidth / 2, 150, 90, 0, 2 * Math.PI, true)
-  ctx.stroke()
   // 第二个圆
   ctx.beginPath()
   ctx.setStrokeStyle("black")
   ctx.setLineWidth(2)
-  ctx.arc(sysWidth / 2, 80, 110, 0, 2 * Math.PI, true)
+  ctx.arc(sysWidth / 2, 180, 110, 0, 2 * Math.PI, true)
   ctx.closePath()
   ctx.stroke()
   // 第三个圆
   ctx.beginPath()
   ctx.setStrokeStyle("black")
   ctx.setLineWidth(2)
-  ctx.arc(sysWidth / 2, 80, 140, 0, 2 * Math.PI, true)
-  ctx.closePath()
-  ctx.stroke()
-  // 动态画圆
-  ctx.beginPath()
-  ctx.moveTo(sysWidth / 2, 0)
-  ctx.lineTo(sysWidth / 2, 0)
-  // ctx.rotate((Math.PI/30)* 50)
-  ctx.setStrokeStyle("black")
+  ctx.arc(sysWidth / 2, 180, 140, 0, 2 * Math.PI, true)
   ctx.closePath()
   ctx.stroke()
 
@@ -187,26 +174,44 @@ var drawCircles = function() {
     })
 }
 
-var testCircle = function() {
-  var cxt_arc = wx.createCanvasContext('circleCanvas');//创建并返回绘图上下文context对象。  
-  cxt_arc.setLineWidth(6);  
-  cxt_arc.setStrokeStyle('#d2d2d2');  
-  cxt_arc.setLineCap('round')  
-  cxt_arc.beginPath();//开始一个新的路径  
-  cxt_arc.arc(sysWidth / 2, 180, 100, 0, 2*Math.PI, false);//设置一个原点(106,106)，半径为100的圆的路径到当前路径  
-  cxt_arc.stroke();//对当前路径进行描边     
-  cxt_arc.setLineWidth(6);  
-  cxt_arc.setStrokeStyle('#3ea6ff');  
-  cxt_arc.setLineCap('round')  
-    
+var progressCircle = function() {
+  var ctx = wx.createCanvasContext('circleCanvas')
+  // 第二个圆
+  ctx.beginPath()
+  ctx.setStrokeStyle("black")
+  ctx.setLineWidth(2)
+  ctx.arc(sysWidth / 2, 180, 120, 0, 2 * Math.PI, true)
+  ctx.closePath()
+  ctx.stroke()
+  // 第三个圆
+  ctx.beginPath()
+  ctx.setStrokeStyle("black")
+  ctx.setLineWidth(2)
+  ctx.arc(sysWidth / 2, 180, 160, 0, 2 * Math.PI, true)
+  ctx.closePath()
+  ctx.stroke()
+  // 动态画圆
+  ctx.setLineWidth(2);  
+  ctx.setStrokeStyle('#d2d2d2');  
+  ctx.setLineCap('round')  
+  ctx.beginPath();//开始一个新的路径  
+  ctx.arc(sysWidth / 2, 180, 100, 0, 2*Math.PI, false);//设置一个原点(106,106)，半径为100的圆的路径到当前路径  
+  ctx.stroke();//对当前路径进行描边     
+  ctx.setLineWidth(2);  
+  ctx.setStrokeStyle('#3ea6ff');  
+  ctx.setLineCap('round')  
   // var tmpAngle = 0.24 * Math.PI / 180
   var step = 6 * Math.PI / 180
   tmpAngle = tmpAngle + step
   console.log('tmpAngle', tmpAngle)
-  cxt_arc.beginPath();//开始一个新的路径
-  cxt_arc.arc(sysWidth / 2, 180, 100, -0.5 * Math.PI, tmpAngle, false); 
-  cxt_arc.stroke();//对当前路径进行描边
-  cxt_arc.draw(); 
+  ctx.beginPath();//开始一个新的路径
+  ctx.arc(sysWidth / 2, 180, 100, -0.49 * Math.PI, tmpAngle, false); 
+  ctx.stroke();//对当前路径进行描边
+  
+  wx.drawCanvas({
+      canvasId: 'circleCanvas',
+      actions: ctx.getActions()
+    })
 }
 
 Page({
@@ -262,15 +267,26 @@ Page({
     fitImg(this)
     // countStart(this)
     restartTimer(this)
-    // drawCircles()
-    // testCircle()
+    progressCircle()
   },
   // 暂停计时
   stopCount: function() {
-    countStop()
+    stopPeriod = countStop()
     var stopTime = this.data['time']
     this.setData({
-      time: stopTime
+      time: stopTime,
+      continueDisplay: 'show',
+      pauseDisplay: 'hide'
+    })
+    // console.log('stop count')
+  },
+  // 继续计时
+  continueCount: function() {
+    countContinue(stopPeriod, this)
+    console.log('continueCount')
+    this.setData({
+      continueDisplay: 'hide',
+      pauseDisplay: 'show'
     })
   },
   // 放弃

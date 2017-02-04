@@ -37,6 +37,8 @@
 
 .time-container {
   text-align: center;
+  position: relative;
+  top: -190px;
 }
 
 .section {
@@ -149,6 +151,10 @@
   color: white;
 }
 
+.continue-btn {
+
+}
+
 .end-btn {
   background-color: rgba(250, 85, 88, 0.1);
   width: 150px;
@@ -167,11 +173,22 @@
     width: 176px;
     height:176px;
 }
+
 .time-crl-path {
     width: 176px;
     height: 176px;
 }
+
 .crl-dot {
     width: 9px;
     height:9px;
 }
+
+.hide {
+  display: none;
+}
+
+.show {
+  display: block;
+}
+
